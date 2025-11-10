@@ -45,6 +45,12 @@ const ReportsMenu = () => {
           selected={location.pathname === '/reports/trips'}
         />
         <MenuItem
+          title={t('reportTripsSummary')}
+          link="/reports/trips-summary"
+          icon={<PlayCircleFilledIcon />}
+          selected={location.pathname === '/reports/trips-summary'}
+        />
+        <MenuItem
           title={t('reportStops')}
           link="/reports/stops"
           icon={<PauseCircleFilledIcon />}

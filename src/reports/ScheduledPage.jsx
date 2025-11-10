@@ -51,6 +51,8 @@ const ScheduledPage = () => {
         return t('reportSummary');
       case 'trips':
         return t('reportTrips');
+      case 'trips-summary':
+        return t('reportTripsSummary');
       case 'stops':
         return t('reportStops');
       default:

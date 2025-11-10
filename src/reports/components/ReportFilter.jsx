@@ -21,7 +21,7 @@ export const updateReportParams = (searchParams, setSearchParams, key, values) =
 };
 
 const ReportFilter = ({
-  children, onShow, onExport, onSchedule, deviceType, loading,
+  children, onShow, onExport, onExportPdf, onSchedule, deviceType, loading,
 }) => {
   const { classes } = useReportStyles();
   const t = useTranslation();
@@ -62,7 +62,12 @@ const ReportFilter = ({
       json: t('reportShow'),
     };
     if (onExport && loaded) {
-      result.export = t('reportExport');
+      result.export = t('reportExportExcel');
+    }
+    // if (onExportPdf && loaded) {
+    //   result.exportPdf = t('reportExportPdf');
+    // }
+    if ((onExport || onExportPdf) && loaded) {
       result.print = t('reportPrint');
     }
     if (onSchedule && !readonly) {
@@ -121,7 +126,14 @@ const ReportFilter = ({
   const onSelected = (type) => {
     switch (type) {
       case 'export':
-        onExport({ deviceIds, groupIds, from, to });
+        if (onExport) {
+          onExport({ deviceIds, groupIds, from, to });
+        }
+        break;
+      case 'exportPdf':
+        if (onExportPdf) {
+          onExportPdf({ deviceIds, groupIds, from, to });
+        }
         break;
       case 'print':
         window.print();
@@ -140,6 +152,16 @@ const ReportFilter = ({
           calendarId,
           attributes: {},
         });
+        break;
+      case 'export':
+        if (onExport) {
+          onExport({ deviceIds, groupIds, from, to });
+        }
+        break;
+      case 'exportPdf':
+        if (onExportPdf) {
+          onExportPdf({ deviceIds, groupIds, from, to });
+        }
         break;
       case 'json':
       default:
